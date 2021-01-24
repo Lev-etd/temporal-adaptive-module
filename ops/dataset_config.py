@@ -102,7 +102,7 @@ def return_jester(modality):
 def return_kinetics(modality):
     global ROOT_DATASET
     ROOT_DATASET = '/mnt/lustrenew/share/liuzhaoyang/datasets/'
-    filename_categories = 400
+    filename_categories = 3
     if modality == 'RGB':
         root_data = ROOT_DATASET + 'k400/'
         filename_imglist_train = 'k400/label/k400_train_list.txt'

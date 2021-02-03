@@ -120,8 +120,8 @@ def return_kinetics(modality):
     filename_categories = 3
     if modality == 'RGB':
         root_data = ROOT_DATASET + 'Kinetics400/'
-        filename_imglist_train = '../input/dataset4kinetics/datasets/Kinetics400/annotations/train_data.txt'
-        filename_imglist_val = '../input/dataset4kinetics/datasets/Kinetics400/annotations/val_data.txt'
+        filename_imglist_train = 'Kinetics400/annotations/train_data.txt'
+        filename_imglist_val = 'Kinetics400/annotations/val_data.txt'
         prefix = 'img_{:05d}.jpg'
     else:
         raise NotImplementedError('no such modality:' + modality)

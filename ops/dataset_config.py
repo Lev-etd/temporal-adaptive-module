@@ -99,15 +99,30 @@ def return_jester(modality):
     return filename_categories, filename_imglist_train, filename_imglist_val, root_data, prefix
 
 
+
+# def return_kinetics(modality):
+#     global ROOT_DATASET
+#     ROOT_DATASET = '/media/nitro/hdd/course_work/datasets/'
+#     filename_categories = 3
+#     if modality == 'RGB':
+#         root_data = ROOT_DATASET + 'Kinetics400/'
+#         filename_imglist_train = '/media/nitro/hdd/course_work/datasets/Kinetics400/annotations/train_data.txt'
+#         filename_imglist_val = '/media/nitro/hdd/course_work/datasets/Kinetics400/annotations/val_data.txt'
+#         prefix = 'img_{:05d}.jpg'
+#     else:
+#         raise NotImplementedError('no such modality:' + modality)
+#     return filename_categories, filename_imglist_train, filename_imglist_val, root_data, prefix
+
+
 def return_kinetics(modality):
     global ROOT_DATASET
-    ROOT_DATASET = '/mnt/lustrenew/share/liuzhaoyang/datasets/'
+    ROOT_DATASET = '../input/dataset4kinetics/datasets/'
     filename_categories = 3
     if modality == 'RGB':
-        root_data = ROOT_DATASET + 'k400/'
-        filename_imglist_train = 'k400/label/k400_train_list.txt'
-        filename_imglist_val = 'k400/label/k400_val_list.txt'
-        prefix = 'img_{:05d}.png'
+        root_data = ROOT_DATASET + 'Kinetics400/'
+        filename_imglist_train = '/media/nitro/hdd/course_work/datasets/Kinetics400/annotations/train_data.txt'
+        filename_imglist_val = '/media/nitro/hdd/course_work/datasets/Kinetics400/annotations/val_data.txt'
+        prefix = 'img_{:05d}.jpg'
     else:
         raise NotImplementedError('no such modality:' + modality)
     return filename_categories, filename_imglist_train, filename_imglist_val, root_data, prefix

@@ -65,12 +65,14 @@ class TSNDataSet(data.Dataset):
 
     def _load_image(self, directory, idx):
         if self.modality == 'RGB' or self.modality == 'RGBDiff':
+#             print(os.path.join(self.root_path, directory,self.image_tmpl.format(idx)))
             try:
                 return [
                     Image.open(
                         os.path.join(
                             self.root_path, directory,
                             self.image_tmpl.format(idx))).convert('RGB')
+                    
                 ]
             except Exception:
                 print(
@@ -127,7 +129,7 @@ class TSNDataSet(data.Dataset):
 
     def _parse_list(self):
         # check the frame number is large >3:
-        tmp = [x.strip().split(' ') for x in open(self.list_file)]
+        tmp = [x.strip().split(',') for x in open(self.list_file)]
         if not self.test_mode or self.remove_missing:
             tmp = [item for item in tmp if int(item[1]) >= 3]
         self.video_list = [VideoRecord(item) for item in tmp]
@@ -285,12 +287,14 @@ class TSNDataSet(data.Dataset):
         return self.get(record, segment_indices)
 
     def get(self, record, indices):
-
+#         print(indices)
         images = list()
         for seg_ind in indices:
+#             print(seg_ind)
             p = int(seg_ind)
             for i in range(self.new_length):
                 seg_imgs = self._load_image(record.path, p)
+                
                 images.extend(seg_imgs)
                 if p < record.num_frames:
                     p += 1

@@ -116,7 +116,7 @@ def return_jester(modality):
 
 def return_kinetics(modality):
     global ROOT_DATASET
-    ROOT_DATASET = '../input/dataset4kinetics/datasets/'
+    ROOT_DATASET = '/kaggle/input/dataset4kinetics/datasets/'
     filename_categories = 3
     if modality == 'RGB':
         root_data = ROOT_DATASET + 'Kinetics400/'

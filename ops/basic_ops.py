@@ -12,7 +12,8 @@ class SegmentConsensus(torch.autograd.Function):
         self.consensus_type = consensus_type
         self.dim = dim
         self.shape = None
-
+    
+    @staticmethod
     def forward(self, input_tensor):
         self.shape = input_tensor.size()
         if self.consensus_type == 'avg':

@@ -25,6 +25,8 @@ class SegmentConsensus(torch.autograd.Function):
 
         return output
 
+    
+    @staticmethod
     def backward(self, grad_output):
         if self.consensus_type == 'avg':
             grad_in = grad_output.expand(self.shape) / float(self.shape[self.dim])

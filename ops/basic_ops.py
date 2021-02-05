@@ -32,7 +32,7 @@ class SegmentConsensus(torch.autograd.Function):
         else:
             grad_in = None
 
-        return grad_in
+        return grad_in, None
 
 
 class ConsensusModule(torch.nn.Module):

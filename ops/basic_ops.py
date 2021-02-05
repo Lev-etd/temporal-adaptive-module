@@ -3,6 +3,7 @@ import torch
 
 class Identity(torch.nn.Module):
     def forward(self, input):
+        ctx.save_for_backward(input)
         return input
 
 
@@ -14,20 +15,23 @@ class SegmentConsensus(torch.autograd.Function):
         self.shape = None
     
     @staticmethod
-    def forward(self, input_tensor):
+    def forward(self, ctx, input_tensor):
+        
         self.shape = input_tensor.size()
         if self.consensus_type == 'avg':
             output = input_tensor.mean(dim=self.dim, keepdim=True)
         elif self.consensus_type == 'identity':
             output = input_tensor
         else:
-            output = None
-
+            output = None            
+        ctx.save_for_backward(output)
+        
         return output
 
     
     @staticmethod
-    def backward(self, grad_output):
+    def backward(self, ctx, grad_output):
+        grad_output = ctx.saved_tensors
         if self.consensus_type == 'avg':
             grad_in = grad_output.expand(self.shape) / float(self.shape[self.dim])
         elif self.consensus_type == 'identity':
@@ -46,5 +50,6 @@ class ConsensusModule(torch.nn.Module):
         self.dim = dim
     
     @staticmethod
-    def forward(self, input):
+    def forward(self, ctx, input):
+        ctx.save_for_backward(input)
         return SegmentConsensus(self.consensus_type, self.dim)(input)

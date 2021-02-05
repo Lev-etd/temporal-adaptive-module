@@ -3,7 +3,7 @@ import torch
 
 class Identity(torch.nn.Module):
     @staticmethod
-    def forward(self, input):
+    def forward(ctx, input):
         return input
 
 
@@ -40,7 +40,7 @@ class ConsensusModule(torch.nn.Module):
 
     
     @staticmethod
-    def forward(self, input):
+    def forward(ctx, input):
         ctx.consensus_type = consensus_type if consensus_type != 'rnn' else 'identity'
         ctx.dim = dim
         return SegmentConsensus.apply(input,(ctx.consensus_type, ctx.dim))

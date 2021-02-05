@@ -301,6 +301,7 @@ class TSN(nn.Module):
 
         return params_group
 
+    @staticmethod
     def forward(self, input, no_reshape=False):
         if not no_reshape:
             sample_len = (3 if self.modality == "RGB" else 2) * self.new_length

@@ -37,10 +37,11 @@ class SegmentConsensus(torch.autograd.Function):
 
 class ConsensusModule(torch.nn.Module):
 
-
+    def __init__(self, consensus_type, dim=1):
+        super(ConsensusModule, self).__init__()
+        self.consensus_type = consensus_type if consensus_type != 'rnn' else 'identity'
+        self.dim = dim
     
     @staticmethod
     def forward(ctx, input):
-        ctx.consensus_type = consensus_type if consensus_type != 'rnn' else 'identity'
-        ctx.dim = dim
-        return SegmentConsensus.apply(input,(ctx.consensus_type, ctx.dim))
+        return SegmentConsensus.apply(input,(self.consensus_type, self.dim))

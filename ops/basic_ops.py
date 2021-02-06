@@ -45,7 +45,7 @@ class ConsensusModule(torch.nn.Module):
         self.consensus_type = consensus_type if consensus_type != 'rnn' else 'identity'
         self.dim = dim
         
-    @staticmethod
+    
     def forward(self, input):
         return SegmentConsensus(self.consensus_type, self.dim)(input)
 #     @staticmethod

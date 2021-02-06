@@ -105,7 +105,7 @@ def main():
     if args.tune_from:
         print(("=> fine-tuning from '{}'".format(args.tune_from)))
         if device == 'cuda':
-            net = torch.nn.DataParallel(net)
+            net = torch.nn.DataParallel(model, device_ids=args.gpus).cuda()
             cudnn.benchmark = True
             sd = torch.load(args.tune_from, "cpu")
             sd = sd['state_dict']

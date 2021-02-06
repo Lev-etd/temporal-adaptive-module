@@ -109,6 +109,8 @@ def main():
         sd = torch.load(args.tune_from, "cpu")
         sd = sd['state_dict']
         model_dict = model.state_dict()
+        model = torch.nn.DataParallel(model, device_ids=args.gpus).cuda()
+        cudnn.benchmark = True
         replace_dict = []
         for k, v in sd.items():
             if k not in model_dict and k.replace('.net', '') in model_dict:
@@ -132,6 +134,7 @@ def main():
             sd = {k: v for k, v in sd.items() if 'conv1.weight' not in k}
         model_dict.update(sd)
         model.load_state_dict(model_dict)
+        model = torch.nn.DataParallel(model, device_ids=args.gpus).cuda()
 
     cudnn.benchmark = True
 

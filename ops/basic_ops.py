@@ -46,7 +46,7 @@ class ConsensusModule(torch.nn.Module):
         self.dim = dim
         
     @staticmethod
-    def forward(ctx, input):
+    def forward(self, input):
         ctx.consensus_type = consensus_type if consensus_type != 'rnn' else 'identity'
         ctx.dim = dim
         ctx.save_for_backward(input, consensus_type, dim)
